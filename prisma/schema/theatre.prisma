@@ -1,0 +1,51 @@
+model Theatre {
+  theatreId  String   @id @default(cuid())
+  title      String
+  location   String
+  coverImage String?
+  Screen     Screen[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Screen {
+  screenId  String   @id @default(cuid())
+  title     String
+  theatre   Theatre  @relation(fields: [theatreId], references: [theatreId])
+  theatreId String
+  Show      Show[]
+  Seat      Seat[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Show {
+  showId    String   @id @default(cuid())
+  time      DateTime
+  movie     Movie    @relation(fields: [movieId], references: [movieId])
+  movieId   String
+  screen    Screen   @relation(fields: [screenId], references: [screenId])
+  screenId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Seat {
+  seatId     String   @id @default(cuid())
+  row        Int
+  column     Int
+  seatType   SeatType @relation(fields: [seatTypeId], references: [seatTypeId])
+  seatTypeId String
+  screen     Screen   @relation(fields: [screenId], references: [screenId])
+  screenId   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SeatType {
+  seatTypeId String   @id @default(cuid())
+  title      String?
+  seats      Seat[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

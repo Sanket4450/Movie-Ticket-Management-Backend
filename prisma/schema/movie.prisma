@@ -1,0 +1,109 @@
+model Movie {
+  movieId              String                 @id @default(cuid())
+  title                String
+  duration             Int
+  releaseDate          DateTime
+  endDate              DateTime
+  status               MovieStatus            @default(PENDING)
+  storyline            String                 @db.Text
+  minAge               Int?
+  averageRating        Float?
+  genres               MovieGenreMapping[]
+  languages            MovieLanguageMapping[]
+  MovieDirectorMapping MovieDirectorMapping[]
+  MovieActorMapping    MovieActorMapping[]
+  shows                Show[]
+  ratings              Rating[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  languageLanguageId   String?
+}
+
+enum MovieStatus {
+  PENDING
+  ACTIVE
+  END
+}
+
+model Genre {
+  genreId String              @id @default(cuid())
+  title   String              @unique
+  movies  MovieGenreMapping[]
+}
+
+model MovieGenreMapping {
+  movie   Movie  @relation(fields: [movieId], references: [movieId])
+  movieId String
+  genre   Genre  @relation(fields: [genreId], references: [genreId])
+  genreId String
+
+  @@unique([movieId, genreId])
+  @@map("MovieGenre")
+}
+
+model Language {
+  languageId String                 @id @default(cuid())
+  title      String                 @unique
+  movies     MovieLanguageMapping[]
+}
+
+model MovieLanguageMapping {
+  movie      Movie    @relation(fields: [movieId], references: [movieId])
+  movieId    String
+  language   Language @relation(fields: [languageId], references: [languageId])
+  languageId String
+
+  @@unique([movieId, languageId])
+  @@map("MovieLanguage")
+}
+
+model Rating {
+  ratingId  String   @id @default(cuid())
+  stars     Int
+  movie     Movie    @relation(fields: [movieId], references: [movieId])
+  movieId   String
+  user      User     @relation(fields: [userId], references: [userId])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([movieId, userId])
+}
+
+model Director {
+  directorId           String                 @id @default(cuid())
+  fullname             String
+  profileImage         String?
+  MovieDirectorMapping MovieDirectorMapping[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+}
+
+model MovieDirectorMapping {
+  movie      Movie    @relation(fields: [movieId], references: [movieId])
+  movieId    String
+  director   Director @relation(fields: [directorId], references: [directorId])
+  directorId String
+
+  @@unique([movieId, directorId])
+  @@map("MovieDirector")
+}
+
+model Actor {
+  actorId           String              @id @default(cuid())
+  fullname          String
+  profileImage      String?
+  MovieActorMapping MovieActorMapping[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+model MovieActorMapping {
+  movie   Movie  @relation(fields: [movieId], references: [movieId])
+  movieId String
+  actor   Actor  @relation(fields: [actorId], references: [actorId])
+  actorId String
+
+  @@unique([movieId, actorId])
+  @@map("MovieActor")
+}
