@@ -4,7 +4,7 @@ model Movie {
   duration             Int
   releaseDate          DateTime
   endDate              DateTime
-  status               MovieStatus            @default(PENDING)
+  status               MovieStatus            @default(pending)
   storyline            String                 @db.Text
   minAge               Int?
   averageRating        Float?
@@ -20,9 +20,9 @@ model Movie {
 }
 
 enum MovieStatus {
-  PENDING
-  ACTIVE
-  END
+  pending
+  active
+  end
 }
 
 model Genre {
