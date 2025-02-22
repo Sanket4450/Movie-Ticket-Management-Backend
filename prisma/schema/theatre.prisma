@@ -38,6 +38,7 @@ model Seat {
   seatTypeId String
   screen     Screen   @relation(fields: [screenId], references: [screenId])
   screenId   String
+  tickets    Ticket[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -48,4 +49,14 @@ model SeatType {
   seats      Seat[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model Ticket {
+  ticketId  String   @id @default(cuid())
+  seat      Seat     @relation(fields: [seatId], references: [seatId])
+  seatId    String
+  user      User     @relation(fields: [userId], references: [userId])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

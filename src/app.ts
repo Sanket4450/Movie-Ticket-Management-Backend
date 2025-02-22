@@ -1,5 +1,8 @@
 import express, { Request, Response } from 'express'
 import { STATUS_CODES } from './utils/status'
+import { connectDB } from './config/db'
+
+connectDB()
 
 const app = express()
 
