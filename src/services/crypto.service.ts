@@ -1,6 +1,6 @@
 import { hash, compare } from 'bcryptjs'
 
-class CryptoService {
+export default class CryptoService {
   constructor() {}
 
   async encryptPassword(password: string): Promise<string> {
@@ -14,5 +14,3 @@ class CryptoService {
     return compare(password, hashedPassword)
   }
 }
-
-export default CryptoService

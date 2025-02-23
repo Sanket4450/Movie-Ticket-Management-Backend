@@ -1,16 +1,17 @@
 model User {
-  userId    String    @id @default(cuid())
-  fullname  String
-  username  String    @unique
-  email     String    @unique
-  password  String?
-  dob       DateTime?
-  mobile    String?
-  authType  AuthType
-  ratings   Rating[]
-  tickets   Ticket[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  userId      String    @id @default(cuid())
+  fullname    String
+  username    String    @unique
+  email       String    @unique
+  password    String?
+  dob         DateTime?
+  mobile      String?
+  authType    AuthType
+  is_verified Boolean   @default(false)
+  ratings     Rating[]
+  tickets     Ticket[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 enum AuthType {

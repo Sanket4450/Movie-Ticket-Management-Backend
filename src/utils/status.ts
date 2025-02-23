@@ -1,9 +1,12 @@
-export const STATUS_CODES = {
+export const HttpStatus = {
+  // Error
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
-  CONFLICT: 403,
+  FORBIDDEN: 403,
+  CONFLICT: 409,
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
 
+  // Success
   SUCCESS: 200,
 }

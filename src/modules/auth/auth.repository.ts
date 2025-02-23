@@ -2,7 +2,7 @@ import { Prisma, User } from '@prisma/client'
 import prisma from '../../config/prisma'
 
 export class UserRepository {
-  async createUser(data: User): Promise<User> {
+  async createUser(data: Prisma.UserCreateInput): Promise<User> {
     return prisma.user.create({ data })
   }
 
@@ -10,17 +10,30 @@ export class UserRepository {
     return prisma.user.findUnique({ where: { userId } })
   }
 
-  async getUser(cond: Prisma.UserWhereUniqueInput): Promise<User | null> {
-    return prisma.user.findUnique({ where: cond })
+  async getUser(where: Prisma.UserWhereInput): Promise<User | null> {
+    return prisma.user.findFirst({ where })
   }
 
   async getAllUsers(): Promise<User[]> {
     return prisma.user.findMany({ where: {} })
   }
 
-  async updateUser(userId: string, data: Partial<User>): Promise<User | null> {
+  async updateUserById(
+    userId: string,
+    data: Prisma.UserUpdateInput
+  ): Promise<User | null> {
     return prisma.user.update({
       where: { userId },
+      data,
+    })
+  }
+
+  async updateUser(
+    where: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput
+  ): Promise<User | null> {
+    return prisma.user.update({
+      where,
       data,
     })
   }

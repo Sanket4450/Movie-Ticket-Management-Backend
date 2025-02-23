@@ -1,5 +1,5 @@
-import { SUCCESS_MSG } from './constants'
-import { STATUS_CODES } from './status'
+import { SUCCESS_MSG } from './messages'
+import { HttpStatus } from './status'
 
 interface SendResponse {
   statusCode?: number
@@ -7,8 +7,8 @@ interface SendResponse {
   result?: any
 }
 
-export default function sendReponse({
-  statusCode = STATUS_CODES.SUCCESS,
+export default function buildResponse({
+  statusCode = HttpStatus.SUCCESS,
   message = SUCCESS_MSG.OK,
   result = {},
 }: SendResponse) {

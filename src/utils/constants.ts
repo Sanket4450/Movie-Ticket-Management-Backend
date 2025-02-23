@@ -1,25 +1,24 @@
-const MESSAGES = {
-  ERROR_MSG: {
-    // general
-    ROUTE_NOT_FOUND: 'Route not Found!',
-    INTERNAL_SERVER_ERROR: 'Internal Server Error!',
+export const CONSTANTS = {
+  PROJECT_NAME: 'Movie Ticket Management',
+  TEMPLATES_DIR_NAME: 'templates',
 
-    // user
-    USER_NOT_FOUND_WITH_USERNAME: 'User not found with the provided email!',
-    INCORRECT_PASSWORD: 'Incorrect password!',
-  },
+  OTP: 'otp',
 
-  SUCCESS_MSG: {
-    OK: 'OK!',
-    LOGIN_SUCCESS: 'User logged-in successfully.',
-    LOGOUT_SUCCESS: 'Logout successfull.',
-  },
+  VERIFICATION_OTP_EXPIRY: 20,
 }
-
-export const { ERROR_MSG, SUCCESS_MSG } = MESSAGES
 
 export const APP_ENV = {
   DEV: 'dev',
   STAGING: 'staging',
   PROD: 'prod',
+}
+
+export const VALIDATION_TYPES = {
+  PARAMS: 'params',
+  QUERY: 'query',
+  BODY: 'body',
+} as const
+
+export const TEMPLATE_FILE_NAMES = {
+  VERIFY_USER: 'verifyUser.hbs',
 }
