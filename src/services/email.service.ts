@@ -2,6 +2,7 @@ import { Transporter, createTransport } from 'nodemailer'
 import { SendEmail } from '../types/email'
 
 export default class EmailService {
+  private static instance: EmailService
   private transporter: Transporter
 
   constructor() {
@@ -14,6 +15,13 @@ export default class EmailService {
         pass: process.env.EMAIL_PASS,
       },
     })
+  }
+
+  static getInstance(): EmailService {
+    if (!EmailService.instance) {
+      EmailService.instance = new EmailService()
+    }
+    return EmailService.instance
   }
 
   async sendEmail({ to, subject, content }: SendEmail) {

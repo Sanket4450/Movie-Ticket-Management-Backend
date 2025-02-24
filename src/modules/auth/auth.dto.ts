@@ -8,7 +8,16 @@ export interface RegisterUserDto {
   authType: AuthType
 }
 
-export interface verifyOtpDto {
+export interface ResendOtpDto {
+  email: string
+}
+
+export interface VerifyOtpDto {
   otp: string
   email: string
+}
+
+export interface LoginUserDto {
+  email: string
+  password: string
 }

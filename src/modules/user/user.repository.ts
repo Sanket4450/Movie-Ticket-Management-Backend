@@ -2,6 +2,16 @@ import { Prisma, User } from '@prisma/client'
 import prisma from '../../config/prisma'
 
 export class UserRepository {
+  private static instance: UserRepository
+  constructor() {}
+
+  static getInstance(): UserRepository {
+    if (!UserRepository.instance) {
+      UserRepository.instance = new UserRepository()
+    }
+    return UserRepository.instance
+  }
+
   async createUser(data: Prisma.UserCreateInput): Promise<User> {
     return prisma.user.create({ data })
   }
@@ -10,8 +20,8 @@ export class UserRepository {
     return prisma.user.findUnique({ where: { userId } })
   }
 
-  async getUser(where: Prisma.UserWhereInput): Promise<User | null> {
-    return prisma.user.findFirst({ where })
+  async getUser(args: Prisma.UserFindFirstArgs): Promise<User | null> {
+    return prisma.user.findFirst(args)
   }
 
   async getAllUsers(): Promise<User[]> {

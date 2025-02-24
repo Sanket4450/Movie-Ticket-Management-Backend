@@ -12,9 +12,21 @@ router.post(
 )
 
 router.post(
+  '/resend-otp',
+  validateReq(authValidation.resendOtpValidation),
+  authController.verifyOtp
+)
+
+router.post(
   '/verify-otp',
   validateReq(authValidation.verifyOtpValidation),
   authController.verifyOtp
+)
+
+router.post(
+  '/login',
+  validateReq(authValidation.loginUserValidation),
+  authController.loginUser
 )
 
 export default router

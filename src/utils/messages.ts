@@ -10,8 +10,10 @@ const MESSAGES = {
     USER_EXIST_WITH_EMAIL: 'User already exists with the provided email!',
     USER_EXIST_WITH_USERNAME: 'User already exists with the provided username!',
     USER_ALREADY_VERIFIED: 'User is already verified!',
+    USER_NOT_VERIFIED: 'User is not verified!',
     OTP_EXPIRED: 'OTP is expired! Please resend a new OTP',
     INVALID_OTP: 'Invalid OTP!',
+    INVALID_PASSWORD: 'Invalid Password!',
   },
 
   SUCCESS_MSG: {
@@ -21,8 +23,8 @@ const MESSAGES = {
     LOGOUT_SUCCESS: 'Logout successfull.',
     VERIFICATION_LINK_SENT:
       'Account verification link has been sent to your email address.',
-    ACCOUNT_VERIFIED:
-      'Account verified successfully.',
+    ACCOUNT_VERIFIED: 'Account verified successfully.',
+    PROFILE_UPDATED: 'Profile updated successfully.',
   },
 
   EMAIL_SUB: {
